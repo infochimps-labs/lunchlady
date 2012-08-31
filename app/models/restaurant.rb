@@ -126,7 +126,7 @@ class Restaurant < ActiveRecord::Base
   def previous_order_descriptions(user)
     prev_orders   = orders.includes(:user).sort_by_user(user).merge(User.local)
     descriptions  = [['', '--previous orders--', '']]
-    descriptions += prev_orders.map{|o| [o.user.short_name, o.description[0..100].gsub(/[\r\n\t]+/, ' ').strip, "%.2f"%o.price].to_json }
+    descriptions += prev_orders.map{|o| [o.user.short_name, o.description[0..150].gsub(/[\r\n\t]+/, ' ').strip, "%.2f"%o.price].to_json }
     descriptions.uniq
   end
 
