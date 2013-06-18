@@ -42,7 +42,7 @@
           - cache([restaurant, 'ratings_for', :all]) do
             = ratings_for restaurant, :static
         %td.rating_details{ :style => 'display:none' }
-          - restaurant.rates.order('stars DESC').each do |rating|
+          - restaurant.rates.order('stars DESC').select{|rtg| rtg.rater.is_local? }.each do |rating|
             %span{ :title => rating.rater.name }= rating.stars
     
 .buttons
